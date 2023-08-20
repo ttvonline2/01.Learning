@@ -46,7 +46,12 @@ using vvc = vector<vc>;
 #endif
 //**************************** CODING SPACE ****************************//
 
-bool checkVaild(int a, int b, int c) {}
+bool isValid(vi vt) {
+    if (vt[0] == vt[1] + vt[2]) {
+        return true;
+    }
+    return false;
+}
 
 int32_t main() {
 #if LOCAL
@@ -59,9 +64,24 @@ int32_t main() {
     cin.tie(nullptr);
     int T;
     cin >> T;
+    vi vt(3);
     while (T--) {
-        cout << "adsf";
+        cin >> vt[0] >> vt[1] >> vt[2];
+        bool isoke = false;
+        sort(vt.begin(), vt.end());
+        do {
+            // debug(vt);
+            if (isValid(vt)) {
+                isoke = true;
+                break;
+            }
+        } while (next_permutation(vt.begin(), vt.end()));
+        if (isoke) {
+            cout << "YES\n";
+        } else {
+            cout << "NO\n";
+        }
     }
-    cout << "vang: " << T << "\n";
+
     return 0;
 }
