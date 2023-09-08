@@ -1,0 +1,50 @@
+, here is the code for each file:
+
+1. main.qml:
+
+```qml
+import QtQuick 2.11
+import QtQuick.Controls 2.4
+import QtQuick.Window 2.2
+
+Window {
+
+}
+```
+
+2. main.cpp:
+
+```cpp
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#
+#include "PlayerInterface.h"
+
+int main(int argc, char *argv[])
+{
+
+    return app.exec();
+}
+```
+asdf asdf 
+
+3. PlayerInterface.h:
+
+```cpp
+#ifndef PLAYERINTERFACE_H
+#define PLAYERINTERFACE_H
+
+#include <QObject>
+#include <QDebug>
+#include "PlayerService.h"
+
+class PlayerInterface : public QObject
+{
+    Q_OBJECT
+public:
+   
+    void setRootObject(QObject *rootObject);
+};
+
+#endif // PLAYERINTERFACE_H
+```
