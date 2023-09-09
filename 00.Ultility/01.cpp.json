@@ -4,7 +4,7 @@
 	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
 	// same ids are connected.
 	// Example:
-	"Default code": {
+	"Default code win": {
 		"prefix": "shortMain",
 		"body": [
 			"#include \"bits/stdc++.h\"",
@@ -17,11 +17,11 @@
 		],
 		"description": "Log output to console"
 	},
-	"Default c": {
-		"prefix": "fullcode",
+	"Default macbook": {
+		"prefix": "fullcodeWin",
 		"body": [
-			"#define LOCAL 1",
 			"#if 1",
+			"#define LOCAL 1",
 			"#include<bits/stdc++.h>",
 			"using namespace std;",
 			"",
@@ -69,6 +69,69 @@
 			"int32_t main() {",
 			"#if LOCAL",
 			"    freopen(\"input.txt\", \"r\", stdin); freopen(\"output.txt\", \"w\", stdout);",
+			"#endif",
+			"    ios_base::sync_with_stdio(false); cin.tie(nullptr);",
+			"    $1",
+			"",
+			"    return 0;",
+			"}"
+		],
+		"description": "Log output to console"
+
+	},
+	"Default c": {
+		"prefix": "fullcodeMac",
+		"body": [
+			"#if 1",
+			"#define LOCAL 1",
+			"#include<bits/stdc++.h>",
+			"using namespace std;",
+			"",
+			"//*** debug(x) ***//",
+			"#define debug(x) cout << \"[\" << #x << \"]\" << \" : \" << (x) << endl",
+			"",
+			"#if LOCAL",
+			"template <class Ch, class Tr, class Container>",
+			"basic_ostream <Ch, Tr> & operator << (basic_ostream <Ch, Tr> & os, Container const& x) {",
+			"    os << \"{ \";",
+			"    for(auto& y : x)os << y << \", \";",
+			"    return os << \"}\";",
+			"}",
+			"",
+			"template <class X, class Y>",
+			"ostream & operator << (ostream & os, pair <X, Y> const& p) {",
+			"    return os << \"(\" << p.first << \", \" << p.second << \")\" ;",
+			"}",
+			"",
+			"template<typename T>",
+			"void check_here(T x){",
+			"    cout << \"------------- \" << x << \" -------------\" << endl;",
+			"}",
+			"#endif",
+			"",
+			"//*** define ***//",
+			"#define int long long",
+			"#define pb push_back",
+			"#define FOR(_i,_a,_b) for(int _i = (_a); _i < (_b); _i++)",
+			"#define FORI(_i,_a,_b) for(int _i = (_a); _i <= (_b); _i++)",
+			"#define FORE(it,x) for(auto it = x.begin(); it != x.end(); ++it)",
+			"",
+			"//*** custom using ***//",
+			"using vb = vector<bool>;",
+			"using vvb = vector<vb>;",
+			"using vi = vector<int>;",
+			"using vvi = vector<vi>;",
+			"using vc = vector<char>;",
+			"using vvc = vector<vc>;",
+			"",
+			"#endif",
+			"//**************************** CODING SPACE ****************************//",
+			"",
+			"",
+			"int32_t main() {",
+			"#if LOCAL",
+			"    freopen(\"/Users/vangtruong/Documents/01.Learning/00.Ultility/input.txt\", \"r\", stdin);",
+			"    freopen(\"/Users/vangtruong/Documents/01.Learning/00.Ultility/output.txt\", \"w\", stdout);",
 			"#endif",
 			"    ios_base::sync_with_stdio(false); cin.tie(nullptr);",
 			"    $1",
