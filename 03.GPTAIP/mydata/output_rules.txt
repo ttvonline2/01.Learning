@@ -1,27 +1,15 @@
-I need to code on the below files:
-	+ 1 file main.qml(Graphical User Interface - GUI)
-	+ 1 file main.cpp
-	+ 1 PlayerInterface.cpp and 1 PlayerInterface.h (PlayerInterface class)
-	+ 1 PlayerService.cpp and 1 PlayerService.h (PlayerService class)
+* Background:
+	I'm using QT framework (C++). 
+	My project has:
+	1. main.qml: 
+		import QtQuick 2.11
+		import QtQuick.Controls 2.4
+		import QtQuick.Layouts 1.3
+		
+		ApplicationWindow {
+			visible: true
+			width: 640
+			height: 480
+			title: qsTr("Hello World")
+		}
 	
-The responsibility of each component:
-	+ main.qml (Graphical User Interface)
-	+ main.cpp (the default file of the project)
-	+ PlayerInterface class: communication between GUI and PlayerService
-	+ PlayerService class: takes requests from GUI, and sends back responses to GUI
-	
-How to communicate between components:
-	+ main.qml to PlayerInterface: GUI can call a function in PlayerInterface via a contextPropery named "iPlayer".
-	+ PlayerInterface to main.qml: PlayerInterface can call a javascript function in GUI, via QMetaObject::invokeMethod (m_rootObject, ...). m_rootObject is a private variable in PlayerInterface. m_rootObject will hold the ObjectName "mainWindow". In the main window of GUI. we named that window with the objectName: "mainWindow". 
-	+ PlayerInterface to PlayerService: PlayerInterface can call a function in PlayerService via the pointer m_playerService (instance of PlayerService, m_playerService is set in the constructor of PlayerInterface)
-	+ PlayerService to PlayerInterface: PlayerService can call a function in PlayerInterface via the pointer m_playerInterface (instance of PlayerInterface, m_playerInterface is set in the constructor of PlayerService)
-	+ GUI to PlayerService
-The common coding rules:
-	+ always print log "name of functions" to the terminal whenever that function is called 
-	
-Now, coding all files for this requirement:
-	+ main.qml : have a window "Main Window" size 600x400. ObjectName of "Main Window" is "mainWindow". using QtQuick 2.11, QtQuick.Controls 2.4, QtQuick.Window 2.2
-	+ main.cpp:  create PlayerInterface, setContextPropery "iPlayer".  load main.qml. get Object "mainWindow" and set that Object to m_rootObject in PlayerInterface.
-	+ PlayerInterface: on the constructor, initial m_playerService = PlayerService and expose the instance for PlayerService.
-	+ PlayerService: On the constructor, storge the instance of PlayerInterface in m_playerInterface.
-	+ Important note: add line "class PlayerService;" to avoid error: 'PlayerService' does not name a type

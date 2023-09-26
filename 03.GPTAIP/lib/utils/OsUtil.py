@@ -2,6 +2,7 @@ import os
 import zipfile
 import shutil
 import re
+import subprocess
 
 CWD = os.getcwd()
 
@@ -217,15 +218,36 @@ def write_to_file(filepath, data):
         print("Can't write to ", filepath)
         print("Error:", str(e))
 
+def extract_data(text):
+    data_map = {}
+    pattern = r"(\w+)[.](\w+)[:]\s+```.*\s+([^```]+)"
 
-def split_data(data):
-    pattern = r'\d+\.\s+(\w+\.h|main\.cpp):\s+([\s\S]+?)(?=\n\d+\.|$)'
-    matches = re.findall(pattern, data)
+    matches = re.findall(pattern, text)
+    # print(matches)
+    for match in matches:
+        file_name = match[0] + "."+ match[1]
+        file_data = match[2] 
+        data_map[file_name]= file_data.strip()
+    return data_map
 
-    result = {}
-    for i, match in enumerate(matches):
-        key = f"key {i+1}"
-        value = match[1].strip()
-        result[key]= value
+def build_release(pro_path,out_dir,make32_path):
+    # remove_entry(out_dir)
+    info('---> Build stated')
+    command = "cd /d " + out_dir + " && qmake " + pro_path
+    os.system(command)
+    command = "cd /d " + out_dir + " && " + make32_path + " > output.txt 2>&1"
+    os.system(command)
 
-    return result
+def run_release_exe(release_path):
+    info('---> Open the App:')
+    os.system(release_path)
+
+def check_output_file(output_path):
+    text = get_text_from_file(output_path)
+    pattern = r"(\w+[.]\w+[:]\d+[:]\d+[:] error:[^\n]+)"  #r"(\w+[.]\d+[.]\d+[:] error: [^\n]+)"
+    matches = re.findall(pattern, text)
+    if(len(matches) == 0):
+        pattern = r"(\w+[.]\w+[:]\d+[:]\d+[:] fatal error:[^\n]+)"
+        matches = re.findall(pattern, text)
+        return matches
+    return matches

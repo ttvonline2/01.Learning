@@ -1,0 +1,8 @@
+* Notes
+	1. Graphic User Interface and caculate logic should be handled in main.qml
+	2. in QtQuick 2.11. To make the Grid layout, the only option is to use "Grid" component, not "GridLayout"
+* Response format:
+	Print code section for main.qml. Example:
+	01. main.qml:
+	```
+	import ...

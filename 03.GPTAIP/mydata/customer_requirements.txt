@@ -1,0 +1,33 @@
+*Requirements:
+1. Introduction:
+	Develop a software application that allows users to change their passwords. The software should have a user-friendly interface and enforce specific password requirements.
+
+2. Functional Requirements:
+	2.1 Input Frames:
+		The software should include two input frames: one for entering the "New Password" and another for confirming the "New Password."
+		Both input frames should accept alphanumeric characters and special characters.
+	2.2 Error Display Text Box:
+		The software should have a text box to display password errors.
+		If the user's input does not meet the specified requirements, the error display text box should show the corresponding error message.
+	
+	2.3 Submit Button:
+		The software should have a "Submit" button that triggers the password change process.
+
+	2.4 Password Validation:
+		Upon clicking the "Submit" button, the software should validate the following conditions:
+			a. The "New Password" and "Confirm New Password" must be the same.
+			b. The "New Password" must contain at least one lowercase character, one uppercase character, and one special character.
+
+	2.5 Error Handling:
+		If the above two requirements are not met, the error display text box should show an appropriate error message indicating the encountered password error.
+
+3. User Interface Requirements:
+	The software should have a clean and intuitive user interface.
+	The input frames for the "New Password" and "Confirm New Password" should be clearly labeled.
+	The error display text box should be clearly visible and labeled appropriately.
+	The "Submit" button should be prominently displayed.
+
+4. Testing Requirements:
+	The software should undergo thorough testing to ensure accurate password validation and proper error handling.
+	Test cases should cover various scenarios, including valid passwords, invalid passwords, and error messages.
+	The software should be tested on different platforms and screen resolutions to ensure compatibility and responsiveness.
