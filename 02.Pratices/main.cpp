@@ -1,10 +1,14 @@
 #if 1
-#define LOCAL 1
+#define ON_DEBUG 1
 #include<bits/stdc++.h>
 using namespace std;
 
+#if ON_DEBUG
 //*** debug(x) ***//
 #define debug(x) cout << "[" << #x << "]" << " : " << (x) << endl
+#else
+#define debug(x) //*** debug ***//
+#endif
 
 template <class Ch, class Tr, class Container>
 basic_ostream <Ch, Tr> & operator << (basic_ostream <Ch, Tr> & os, Container const& x) {
@@ -38,19 +42,17 @@ using pi = pair<int,int>;
 #endif
 //**************************** CODING SPACE ****************************//
 
+void solve() {
+    vi n(10,4);
+    debug(n);
+}
 
 int32_t main() {
-#if LOCAL
-    freopen("D:/11.Algorithm/01.Learning/00.Ultility/input.txt", "r", stdin); freopen("D:/11.Algorithm/01.Learning/00.Ultility/output.txt", "w", stdout);
+#ifndef ONLINE_JUDGE
+    freopen("../00.Ultility/input.txt", "r", stdin); freopen("../00.Ultility/output.txt", "w", stdout);
 #endif
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
-    vi v((size_t)64,0);
-    for(auto &x : v) cin >> x;
-    int ans = 0ll;
-    for(int i = 0ll ; i < 64ll ; i ++){
-        ans += v[i]*pow(2ll,i);
-    }
-    cout << ans;
-
+    
+    solve();
     return 0;
 }
