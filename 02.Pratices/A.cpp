@@ -1,5 +1,5 @@
 #if 1
-#define ON_DEBUG 1
+#define ON_DEBUG 0
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -41,10 +41,48 @@ using pi = pair<int,int>;
 
 #endif
 //**************************** CODING SPACE ****************************//
+int T, N;
+vi D,R;
+string S;
+int MAX_VALUE = 10e14;
+
+bool isWin(int X){
+    debug(X);
+    for(int i = 0 ; i < N ; i ++){
+        X = X - D[i];
+        if(X <= 0) return false;
+        if(S[i] == '+'){
+            X = X + R[i];
+        } else {
+            X = X * R[i];
+            if(X < 0){
+                X = MAX_VALUE;
+            }
+        }
+    }
+    return true;
+}
+
+void BinarySearch_Largest_k() {
+    int n = MAX_VALUE;
+    int k = 0;
+    for (int b = n / 2; b >= 1; b /= 2) {
+        // debug(b); debug(k);
+        while (k + b < n && (isWin(k+b) == false) ) k += b;
+    }
+    cout << k + 1 << "\n";
+
+}
+
 
 void solve() {
-    vi n(10,4);
-    debug(n);
+    cin >> N;
+    D.clear(); R.clear(); D.resize(N); R.resize(N); S ="";
+    for(auto &x: D) cin >> x;
+    cin >> S;
+    for(auto &x: R) cin >> x;
+    BinarySearch_Largest_k();
+
 }
 
 int32_t main() {
@@ -52,7 +90,9 @@ int32_t main() {
     freopen("../00.Ultility/input.txt", "r", stdin); freopen("../00.Ultility/output.txt", "w", stdout);
 #endif
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
-    
-    solve();
+    cin >> T;
+    while(T--){
+        solve();
+    }
     return 0;
 }
