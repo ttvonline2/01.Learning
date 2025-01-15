@@ -106,7 +106,7 @@ void solve() {
 
 int32_t main() {
 #ifndef ONLINE_JUDGE
-    freopen("D:/05.Learning/01.Algorithm/00.Ultility/input.txt", "r", stdin); freopen("D:/05.Learning/01.Algorithm/00.Ultility/output.txt", "w", stdout);
+    freopen("../../00.Ultility/input.txt", "r", stdin); freopen("../../00.Ultility/output.txt", "w", stdout);
 #endif
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
     
