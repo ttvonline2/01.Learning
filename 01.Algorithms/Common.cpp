@@ -2,6 +2,15 @@
 using namespace std;
 
 class Common {
+
+    bool isPrime(int n) {
+        if (n < 2) return false;
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+    
     //  A[k + b] <= target is the condition
     void BinarySearch_Largest_k(vector<int> A, int target) {
         int n = A.size();
