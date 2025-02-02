@@ -2,6 +2,20 @@
 using namespace std;
 
 class Common {
+    void debugVvi(vector<vector<long long>>& _arr) {
+        cout << "Array size[R][C]: [" << _arr.size() << "][" << _arr[0].size() << "]\n";
+        //print the index:
+        cout << "   [R]   \t";
+        for (int i = 0;i < _arr[0].size(); i++) cout << i << "   \t";
+        for (int r = 0; r < _arr.size(); r++) {
+            cout << "\n   [" << r << "]   \t";
+            for (int c = 0; c < _arr[0].size(); c++) {
+                cout << _arr[r][c] << "   \t";
+            }
+        }
+        cout << "\n--- END Array debug ---";
+    }
+
 
     bool isPrime(int n) {
         if (n < 2) return false;
@@ -10,7 +24,7 @@ class Common {
         }
         return true;
     }
-    
+
     //  A[k + b] <= target is the condition
     void BinarySearch_Largest_k(vector<int> A, int target) {
         int n = A.size();
