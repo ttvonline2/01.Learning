@@ -5,6 +5,7 @@ using namespace std;
 //*** debug(x) ***//
 #define debug(x) cout << "[" << #x << "]" << " : " << (x) << endl
 
+#define vangtruong  freopen("D:/05.Learning/01.Algorithm/00.Ultility/input.txt", "r", stdin); freopen("D:/05.Learning/01.Algorithm/00.Ultility/output.txt", "w", stdout)
 template <class Ch, class Tr, class Container>
 basic_ostream <Ch, Tr> & operator << (basic_ostream <Ch, Tr> & os, Container const& x) {
     os << "{ ";
@@ -17,20 +18,18 @@ ostream & operator << (ostream & os, pair <X, Y> const& p) {
     return os << "(" << p.first << ", " << p.second << ")" ;
 }
 
-//*** define ***//
-
-#define PB push_back
-#define MP make_pair
-#define FOR(_i,_a,_b) for(int _i = (_a); _i < (_b); _i++)
-#define FORI(_i,_a,_b) for(int _i = (_a); _i <= (_b); _i++)
-#define FORE(it,x) for(auto it = x.begin(); it != x.end(); ++it)
-
-//*** custom using ***//
-using vb = vector<bool>;
-using vvb = vector<vb>;
-using vi = vector<int>;
-using vvi = vector<vi>;
-using vc = vector<char>;
-using vvc = vector<vc>;
-using pi = pair<int,int>;
-//**************************** CODING SPACE ****************************//
+void debugVvi(vector<vector<long long>>& _arr) {
+    int _maxSize = 0;
+    for (auto x : _arr) _maxSize = _maxSize > x.size() ? _maxSize : x.size();
+    cout << "Array size[R][C]: [" << _arr.size() << "][" << _arr[0].size() << "]\n";
+    //print the index:
+    cout << "   [R]   \t";
+    for (int i = 0;i < _maxSize; i++) cout << i << "   \t";
+    for (int r = 0; r < _arr.size(); r++) {
+        cout << "\n   [" << r << "]   \t";
+        for (int c = 0; c < _arr[r].size(); c++) {
+            cout << _arr[r][c] << "   \t";
+        }
+    }
+    cout << "\n--- END Array debug ---\n";
+}
