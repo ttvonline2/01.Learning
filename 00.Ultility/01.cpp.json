@@ -17,6 +17,15 @@
 		],
 		"description": "Log output to console"
 	},
+	"Bit Caculate": {
+		"prefix": "vangbit",
+		"body": [
+			"#define lowPowerOf2(x) (1 << (31 - __builtin_clz(x))) // 16 --> 16; 20 --> 16",
+			"#define gapWithNextPowerOf2(x) (x&-x) // 12 --> 4; 16 --> 16"
+		],
+		"description": "Log output to console"
+	},
+
 	"Default window": {
 		"prefix": "fullWin",
 		"body": [

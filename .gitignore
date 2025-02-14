@@ -37,8 +37,9 @@ release
 *.vscode
 *build-*
 
-input.txt
-output.txt
+**/input.txt
+**/output.txt
 
 .cph
 tmp/
+*/debug.h
