@@ -41,39 +41,30 @@ using pi = pair<int,int>;
 
 #endif
 //**************************** CODING SPACE ****************************//
-int n, res;
-vi arr;
+
 void input() {
-    cin >> n;
-    res = 0;
-    arr.clear(); arr.resize(n);
-    for(auto& x: arr) cin >> x;
+    
 }
-void updateValue(int a, int& b) {
-    if (b < a) {
-        int cnt = ceil(log2((long double)a / (long double)b));
-        b <<= cnt;
-        res += cnt;
-    }
-}
+
 void solve() {
-    FOR(i,1,n){
-        updateValue(arr[i-1], arr[i]);
-    }
-    debug(arr);
-    cout << res << "\n";
+    
 }
 
 int32_t main() {
 #ifndef ONLINE_JUDGE
-    freopen("D:/11.Algorithm/01.Learning/00.Ultility/input.txt", "r", stdin); freopen("D:/11.Algorithm/01.Learning/00.Ultility/output.txt", "w", stdout);
+    freopen("D:/05.Learning/01.Algorithm/00.Ultility/input.txt", "r", stdin); freopen("D:/05.Learning/01.Algorithm/00.Ultility/output.txt", "w", stdout);
 #endif
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
+    
     int tcs = 0; cin >> tcs;
     while (tcs--) {
-        input();
-        solve();
+        int n, a, b;
+        cin >> n >> a >> b;
+        if(abs(a-b)%2 == 1) {
+            cout << "NO\n";
+        } else {
+            cout << "YES\n";
+        }
     }
-
     return 0;
 }

@@ -41,39 +41,79 @@ using pi = pair<int,int>;
 
 #endif
 //**************************** CODING SPACE ****************************//
-int n, res;
-vi arr;
+int n,m;
+string S = "";
+vvi A;
+vvi R,C;
 void input() {
-    cin >> n;
-    res = 0;
-    arr.clear(); arr.resize(n);
-    for(auto& x: arr) cin >> x;
+    cin >> n >> m;
+    A.clear(); A.resize(n,vi(m,0));
+    cin >> S;
+    R.clear(); C.clear(); 
+    R.resize(2,vi(n,0));
+    C.resize(2,vi(m,0));
+    for(int r = 0 ; r < n ; r++){
+        for(int c = 0 ; c < m; c ++){
+            cin >> A[r][c];
+            R[0][r] += A[r][c];
+            C[0][c] += A[r][c];
+        }
+    }
+
+
 }
-void updateValue(int a, int& b) {
-    if (b < a) {
-        int cnt = ceil(log2((long double)a / (long double)b));
-        b <<= cnt;
-        res += cnt;
+void processRC(int r, int c) {
+    // cout << "r,c " << r << ", " << c << "\n";
+    if(R[1][r] == 1) {
+        A[r][c] = 0 - R[0][r];
+        R[0][r] += A[r][c];
+        C[0][c] += A[r][c];
+        C[1][c]--;  R[1][r] = 0;
+    }
+    if(C[1][c] == 1& R[1][r] > 1) {
+        A[r][c] = 0 - C[0][c];
+        R[0][r] += A[r][c];
+        C[0][c] += A[r][c];
+        C[1][c] = 0;  R[1][r]--;
     }
 }
 void solve() {
-    FOR(i,1,n){
-        updateValue(arr[i-1], arr[i]);
+    //preprocess/ upte R-C[1]
+    int r = 0, c = 0;
+    R[1][r]++; C[1][c]++;
+    for(auto x: S){
+        if(x == 'R') c++;
+        if(x == 'D') r++;
+        R[1][r]++; C[1][c]++;
     }
-    debug(arr);
-    cout << res << "\n";
+
+    //
+    r = 0, c = 0;
+    processRC(r,c);
+    for(auto x: S){
+        if(x == 'R') c++;
+        if(x == 'D') r++;
+        processRC(r,c);
+    }
+    // debug(A);
+    for (int r = 0; r < n; r++) {
+        for (int c = 0; c < m; c++) {
+            cout << A[r][c] << " ";
+        }
+        cout << "\n";
+    }
 }
 
 int32_t main() {
 #ifndef ONLINE_JUDGE
-    freopen("D:/11.Algorithm/01.Learning/00.Ultility/input.txt", "r", stdin); freopen("D:/11.Algorithm/01.Learning/00.Ultility/output.txt", "w", stdout);
+    freopen("../../00.Ultility/input.txt", "r", stdin); freopen("../../00.Ultility/output.txt", "w", stdout);
 #endif
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
+    
     int tcs = 0; cin >> tcs;
     while (tcs--) {
         input();
         solve();
     }
-
     return 0;
 }

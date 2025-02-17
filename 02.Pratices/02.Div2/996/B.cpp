@@ -41,39 +41,58 @@ using pi = pair<int,int>;
 
 #endif
 //**************************** CODING SPACE ****************************//
-int n, res;
-vi arr;
+vi A;
+int n;
 void input() {
     cin >> n;
-    res = 0;
-    arr.clear(); arr.resize(n);
-    for(auto& x: arr) cin >> x;
-}
-void updateValue(int a, int& b) {
-    if (b < a) {
-        int cnt = ceil(log2((long double)a / (long double)b));
-        b <<= cnt;
-        res += cnt;
+    A.clear(); A.resize(n);
+    for(auto&x : A) cin >> x;
+    int tmp = 0;
+    pi mp = MP(INT_MAX,-1);
+    FOR(i,0,n){
+        cin >> tmp;
+        A[i] = A[i] - tmp;
+        if(A[i] <= mp.first){
+            mp = MP(A[i], i);
+        }
+    }
+    // 
+    if(mp.first >=0 ) {
+        cout << "YES\n";
+    } else {
+        // tim min nho nhat, khong phai mp.F
+        int m = INT_MAX;
+        FOR(i,0,n){
+            if(i == mp.second) continue;
+            if(A[i] <= m) {
+                m = A[i];
+            }
+        }
+        // nho thu 2 = m;
+        if (m + mp.first < 0) {
+            cout << "NO\n";
+        }
+        else {
+            cout << "YES\n";
+        }
+
     }
 }
+
 void solve() {
-    FOR(i,1,n){
-        updateValue(arr[i-1], arr[i]);
-    }
-    debug(arr);
-    cout << res << "\n";
+    
 }
 
 int32_t main() {
 #ifndef ONLINE_JUDGE
-    freopen("D:/11.Algorithm/01.Learning/00.Ultility/input.txt", "r", stdin); freopen("D:/11.Algorithm/01.Learning/00.Ultility/output.txt", "w", stdout);
+    freopen("D:/05.Learning/01.Algorithm/00.Ultility/input.txt", "r", stdin); freopen("D:/05.Learning/01.Algorithm/00.Ultility/output.txt", "w", stdout);
 #endif
     ios_base::sync_with_stdio(false); cin.tie(nullptr);
+    
     int tcs = 0; cin >> tcs;
     while (tcs--) {
         input();
         solve();
     }
-
     return 0;
 }
