@@ -1,0 +1,12 @@
+[st] : 0
+[kt] : 4
+[v] : baba
+[st] : 1
+[kt] : 1
+0
+[st] : 0
+[kt] : 4
+[v] : ddaa
+[st] : 3
+[kt] : 9
+[v] : acddac

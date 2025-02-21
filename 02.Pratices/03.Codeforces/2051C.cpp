@@ -2,12 +2,11 @@
 #ifdef ONLINE_JUDGE
 #define vangtruong ios_base::sync_with_stdio(false); cin.tie(nullptr)//Expert --> delete
 #define debug(x) //*** debug ***//
-#define debugVi(x) //*** debug ***//
-#define debugVvi(x) //*** debug ***//
+#define debugv(x) //*** debug ***//
+#include<bits/stdc++.h>
 #else
 #include "D:/05.Learning/01.Algorithm/01.Algorithms/debug.h"
 #endif
-#include<bits/stdc++.h>
 using namespace std;
 //*** define ***//
 #define int long long
@@ -20,28 +19,21 @@ using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using v
 using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = "";
 #endif
 //**************************** CODING SPACE ****************************//
-const vi D= {9,99,999,9999,99999,999999,9999999,99999999,999999999};
-int v = 0;
-bool isFound7(int n){
-    string s = to_string(n);
-    return s.find('7') != -1 ? true : false;
-}
-int getAns(int n){
-    deque<pi> Q; Q.push_front(MP(0,n));
-    while(!Q.empty()) {
-        // v++;
-        int a = Q.back().second; int cnt = Q.back().first; Q.pop_back();
-        if(isFound7(a)) return cnt;
-        FOR(i,0,9){
-            int b = a+D[i];
-            Q.push_front(MP(cnt+1ll,b));
-        }
-    }
-}
+
 void solve() {
-    int n; cin >>  n;
-    cout << getAns(n) << "\n";
-    // debug(v);
+    int n,m,k; cin >> n >> m >> k;
+    vi M(m), Q(k);
+    FOR(i,0,m) cin >> M[i];
+    FOR(i,0,k) cin >> Q[i];
+    if(k == n){ string s(m,'1'); cout  << s << "\n"; return;}
+    if(k < n-1){ string s(m,'0'); cout  << s << "\n"; return;}
+    string s(m,'0'); // tim phan tu thieu trong Q. tim v trong m, neu co v chuyen thanh '1' 
+    int v = n;
+    FOR(i,0,k) { if(Q[i] != i+1) { v = i +1; break;}}
+    debugv(M);
+    FOR(i,0,m) {if(M[i] == v){s[i] = '1';}}
+    cout << s << "\n";
+
 }
 
 int32_t main() {

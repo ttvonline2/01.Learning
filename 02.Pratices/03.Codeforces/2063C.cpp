@@ -20,28 +20,44 @@ using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using v
 using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = "";
 #endif
 //**************************** CODING SPACE ****************************//
-const vi D= {9,99,999,9999,99999,999999,9999999,99999999,999999999};
-int v = 0;
-bool isFound7(int n){
-    string s = to_string(n);
-    return s.find('7') != -1 ? true : false;
+bool cmp(pi a,  pi b){
+    return a.first > b.first;
 }
-int getAns(int n){
-    deque<pi> Q; Q.push_front(MP(0,n));
-    while(!Q.empty()) {
-        // v++;
-        int a = Q.back().second; int cnt = Q.back().first; Q.pop_back();
-        if(isFound7(a)) return cnt;
-        FOR(i,0,9){
-            int b = a+D[i];
-            Q.push_front(MP(cnt+1ll,b));
-        }
+int getAns(pi a, vvi& adj, vi D){
+    int res = D[a.second];
+    D[a.second] = 0;
+    for(auto u: adj[a.second]){
+        D[u]--;
     }
+    vector<pi> L(D.size());
+    FOR(i,1,D.size()) L[i] = MP(D[i],i);
+    sort(L.begin(), L.end(), cmp);
+    // for(auto x : L) debug(x);
+    res += L[0].first - 1ll;
+    return res;
 }
 void solve() {
-    int n; cin >>  n;
-    cout << getAns(n) << "\n";
-    // debug(v);
+    int n; cin >> n;
+    vector<pi> L(n+1);
+    vvi adj(n+1);
+    vi D(n+1,0);
+    FOR(i,0,n-1){
+        int a, b; cin >> a >> b;
+        D[a]++; D[b]++;
+        adj[a].push_back(b); adj[b].push_back(a);
+    }
+    // make pi
+    FOR(i,1,n+1) L[i] = MP(D[i],i);
+    sort(L.begin(), L.end(), cmp);
+    if(n == 2) {
+        cout << "0\n"; return;
+    }
+    pi a = L[0], b = L[1], c = L[2];
+    int ans = -INF;
+    ans = max(ans, getAns(a, adj, D));
+    ans = max(ans, getAns(b, adj, D));
+    ans = max(ans, getAns(c, adj, D));
+    cout << ans << "\n";
 }
 
 int32_t main() {

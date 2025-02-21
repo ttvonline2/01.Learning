@@ -20,28 +20,22 @@ using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using v
 using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = "";
 #endif
 //**************************** CODING SPACE ****************************//
-const vi D= {9,99,999,9999,99999,999999,9999999,99999999,999999999};
-int v = 0;
-bool isFound7(int n){
-    string s = to_string(n);
-    return s.find('7') != -1 ? true : false;
-}
-int getAns(int n){
-    deque<pi> Q; Q.push_front(MP(0,n));
-    while(!Q.empty()) {
-        // v++;
-        int a = Q.back().second; int cnt = Q.back().first; Q.pop_back();
-        if(isFound7(a)) return cnt;
-        FOR(i,0,9){
-            int b = a+D[i];
-            Q.push_front(MP(cnt+1ll,b));
+
+void solve() {
+    int n;  cin >> n;
+    vi A(n); FOR(i,0,n) cin >> A[i];
+    if(n&1) {
+        for(int i = 1; i < n-1; i+=2) if(A[i] > A[i+1]) swap(A[i],A[i+1]);
+    } else {
+        for(int i = 0; i < n-1; i+=2) if(A[i] > A[i+1]) swap(A[i],A[i+1]);
+    }
+    debug(A);
+    FOR(i,1,n){
+        if(A[i] < A[i-1]) {
+            cout << "NO\n"; return;
         }
     }
-}
-void solve() {
-    int n; cin >>  n;
-    cout << getAns(n) << "\n";
-    // debug(v);
+    cout  << "YES\n"; 
 }
 
 int32_t main() {

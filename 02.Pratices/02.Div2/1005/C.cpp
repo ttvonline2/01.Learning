@@ -2,12 +2,11 @@
 #ifdef ONLINE_JUDGE
 #define vangtruong ios_base::sync_with_stdio(false); cin.tie(nullptr)//Expert --> delete
 #define debug(x) //*** debug ***//
-#define debugVi(x) //*** debug ***//
-#define debugVvi(x) //*** debug ***//
+#define debugv(x) //*** debug ***//
+#include<bits/stdc++.h>
 #else
 #include "D:/05.Learning/01.Algorithm/01.Algorithms/debug.h"
 #endif
-#include<bits/stdc++.h>
 using namespace std;
 //*** define ***//
 #define int long long
@@ -20,28 +19,34 @@ using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using v
 using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = "";
 #endif
 //**************************** CODING SPACE ****************************//
-const vi D= {9,99,999,9999,99999,999999,9999999,99999999,999999999};
-int v = 0;
-bool isFound7(int n){
-    string s = to_string(n);
-    return s.find('7') != -1 ? true : false;
-}
-int getAns(int n){
-    deque<pi> Q; Q.push_front(MP(0,n));
-    while(!Q.empty()) {
-        // v++;
-        int a = Q.back().second; int cnt = Q.back().first; Q.pop_back();
-        if(isFound7(a)) return cnt;
-        FOR(i,0,9){
-            int b = a+D[i];
-            Q.push_front(MP(cnt+1ll,b));
+vi A,PreAm, PreDuong; // PreAm tinh tu n --> i;// pre duong tu 1 --> i
+int n;
+
+void solve() {
+    cin >> n;
+    A.clear(); A.resize(n+1); 
+    PreAm.clear(); PreAm.resize(n+2,0); PreDuong.clear(); PreDuong.resize(n+2,0); 
+    FOR(i,1,n+1) cin >> A[i];
+    PreDuong[1] = max(0ll,A[1]);
+    FOR(i,2,n+1) {
+        if(A[i] > 0){
+            PreDuong[i] = PreDuong[i-1] + A[i];
+        } else{
+            PreDuong[i] = PreDuong[i-1];
         }
     }
-}
-void solve() {
-    int n; cin >>  n;
-    cout << getAns(n) << "\n";
-    // debug(v);
+    PreAm[n] = max(0ll,-A[n]);
+    for(int i =n; i >= 1; i--) {
+        if(A[i] < 0){
+            PreAm[i] = PreAm[i+1] - A[i];
+        } else{
+            PreAm[i] = PreAm[i+1];
+        }
+    }
+    int ans = 0;
+    debug(PreAm); debug(PreDuong);
+    FOR(i,1,n+1) ans = max(ans, (PreAm[i] + PreDuong[i]));
+    cout << ans  << "\n";
 }
 
 int32_t main() {

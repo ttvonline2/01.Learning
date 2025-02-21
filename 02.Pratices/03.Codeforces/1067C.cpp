@@ -2,6 +2,7 @@
 #ifdef ONLINE_JUDGE
 #define vangtruong ios_base::sync_with_stdio(false); cin.tie(nullptr)//Expert --> delete
 #define debug(x) //*** debug ***//
+#define debugVi(x) //*** debug ***//
 #define debugVvi(x) //*** debug ***//
 #include<bits/stdc++.h>
 #else
@@ -43,5 +44,6 @@ void solve() {
 }
 
 int32_t main() {
+    vangtruong; int tcs = 1; cin >> tcs;
     vangtruong; int tcs = 1; cin >> tcs;
     while (tcs--) {solve();}return 0; }
