@@ -18,7 +18,6 @@
 #include <cstring>
 #include <ctime>
 
-#if __cplusplus >= 201103L
 #include <ccomplex>
 #include <cfenv>
 #include <cinttypes>
@@ -28,7 +27,6 @@
 #include <ctgmath>
 #include <cwchar>
 #include <cwctype>
-#endif
 
 // C++
 #include <algorithm>
@@ -64,7 +62,6 @@
 #include <valarray>
 #include <vector>
 
-#if __cplusplus >= 201103L
 #include <array>
 #include <atomic>
 #include <chrono>
@@ -84,13 +81,13 @@
 #include <type_traits>
 #include <unordered_map>
 #include <unordered_set>
-#endif
 using namespace std;
-
+using namespace std::chrono;
 //*** debug(x) ***//
 #define debug(x) cout << "[" << #x << "]" << " : " << (x) << endl
 
-#define vangtruong  freopen("D:/05.Learning/01.Algorithm/00.Ultility/input.txt", "r", stdin); freopen("D:/05.Learning/01.Algorithm/00.Ultility/output.txt", "w", stdout)
+#define vangtruong  freopen("D:/05.Learning/01.Algorithm/00.Ultility/input.txt", "r", stdin); freopen("D:/05.Learning/01.Algorithm/00.Ultility/output.txt", "w", stdout); auto start_time = high_resolution_clock::now()
+#define hihihaha auto end_time = high_resolution_clock::now();  auto duration_time = duration_cast<milliseconds>(end_time - start_time); cout << "Running time: " << duration_time.count() << " ms" << endl
 template <class Ch, class Tr, class Container>
 basic_ostream <Ch, Tr> & operator << (basic_ostream <Ch, Tr> & os, Container const& x) {
     os << "{ ";
