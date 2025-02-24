@@ -86,8 +86,8 @@ using namespace std::chrono;
 //*** debug(x) ***//
 #define debug(x) cout << "[" << #x << "]" << " : " << (x) << endl
 
-#define vangtruong  freopen("D:/05.Learning/01.Algorithm/00.Ultility/input.txt", "r", stdin); freopen("D:/05.Learning/01.Algorithm/00.Ultility/output.txt", "w", stdout); auto start_time = high_resolution_clock::now()
-#define hihihaha auto end_time = high_resolution_clock::now();  auto duration_time = duration_cast<milliseconds>(end_time - start_time); cout << "Running time: " << duration_time.count() << " ms" << endl
+#define vangtruong  freopen("D:/01.Learning/00.Ultility/input.txt", "r", stdin); freopen("D:/01.Learning/00.Ultility/output.txt", "w", stdout); auto start_time = high_resolution_clock::now() ; thread timeThread(timer_limitation); timeThread.detach()
+#define hihihaha auto end_time = high_resolution_clock::now();  auto duration_time = duration_cast<milliseconds>(end_time - start_time); cout << "Running time: " << duration_time.count() << " ms\n" ; finished_program = true
 template <class Ch, class Tr, class Container>
 basic_ostream <Ch, Tr> & operator << (basic_ostream <Ch, Tr> & os, Container const& x) {
     os << "{ ";
@@ -99,6 +99,8 @@ template <class X, class Y>
 ostream & operator << (ostream & os, pair <X, Y> const& p) {
     return os << "(" << p.first << ", " << p.second << ")" ;
 }
+
+bool finished_program = false;
 
 template <typename T>
 void debugv(const vector<vector<T>>& _arr) {
@@ -153,4 +155,11 @@ void debugv(const vector<bool>& arr) {
         cout << (arr[i] ? "1" : "0") << "   ";  // Chuyển bool thành số
     }
     cout << "\n--- END Array debug ---\n";
+}
+
+
+void timer_limitation() {
+    this_thread::sleep_for(chrono::seconds(2)); // Đợi 1 giây
+    if (!finished_program){cout << "Code Lỗi rồi fen > 2000ms\n"; exit(0);}
+    exit(0);
 }
