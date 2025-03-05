@@ -9,6 +9,15 @@ using namespace std::chrono;
 #else
 #define debug(x) cout << "[" << #x << "]" << " : " << (x) << endl
 #endif
+#define int long long
+#define oo 9e18
+#define MP make_pair
+#define FOR(_i,_a,_b) for(int _i = (_a); _i < (_b); _i++)
+#define FORI(_i,_a,_b) for(int _i = (_a); _i <= (_b); _i++)
+#define FORE(it,x) for(auto it = x.begin(); it != x.end(); ++it)
+using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using vvi = vector<vi>;
+using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = "";
+
 
 #define vangtruong  freopen("D:/01.Learning/00.Ultility/input.txt", "r", stdin); freopen("D:/01.Learning/00.Ultility/output.txt", "w", stdout); auto start_time = high_resolution_clock::now() ; thread timeThread(timer_limitation); timeThread.detach()
 #define hihihaha auto end_time = high_resolution_clock::now();  auto duration_time = duration_cast<milliseconds>(end_time - start_time); cout << "Running time: " << duration_time.count() << " ms\n" ; finished_program = true
@@ -30,9 +39,19 @@ bool finished_program = false;
 #if OFF_DEBUG
 #define DB(...) //*** debug ***//
 #else
+
+// mutiple args
+template<typename... Args>
+void DB(string name, Args... args) {
+    cout << "[" << name << "] "; ((cout << args << " "), ...); cout << '\n';
+}
+
+void DB(const pi& p)  {
+    cout << "{" << p.first << "," << p.second << "}\n";
+}
+
 // Vector<vector>>
-template <typename T>
-void DB(const vector<vector<T>>& _arr, string name = "", string SPACE = " ") {
+void DB(const vector<vector<int>>& _arr, string name = "", string SPACE = " ") {
     int _maxSize = 0;
     for (const auto& x : _arr) _maxSize = max(_maxSize, static_cast<int>(x.size()));
 
@@ -51,34 +70,45 @@ void DB(const vector<vector<T>>& _arr, string name = "", string SPACE = " ") {
     cout << "\n--- END Vector<Vector> debug ---\n";
 }
 
-// Vector 
-template <typename T>
-void DB(const vector<T>& arr, string name = "", string SPACE = " ") {
-    // Print index header
+// Vector<int>
+void DB(const vector<int>& arr, string name = "", string SPACE = " ") {
     cout << name  << " Size: [" << arr.size() << "]\n";
-    // Print column indices
     cout <<  "[Index]" << SPACE << "\t";
     for (int i = 0; i < arr.size(); i++) cout << i << SPACE << "\t";
-    cout << "\n";
-
-    // Print values
-    cout <<  "[Value]" << SPACE << "\t";
-    for (const auto& val : arr) {
-        cout << val << SPACE << "\t";
-    }
-    cout << "\n--- END Vector debug ---\n";
+    cout <<  "\n[Value]" << SPACE << "\t";
+    for (const auto& val : arr) cout << val << SPACE << "\t";
+    cout << "\n--- END Vector<int> debug ---\n";
 }
 
+// Vector<bool>
+void DB(const vector<bool>& arr, string name = "", string SPACE = " ") {
+    cout << name  << " Size: [" << arr.size() << "]\n";
+    cout <<  "[Index]" << SPACE << "\t";
+    for (int i = 0; i < arr.size(); i++) cout << i << SPACE << "\t";
+    cout <<  "\n[Value]" << SPACE << "\t";
+    for (const auto& val : arr) cout << static_cast<int>(val) << SPACE << "\t";
+    cout << "\n--- END Vector<bool> debug ---\n";
+}
 
-// mutiple args
-void DB(string name, auto... args) {
-    cout << name << ": ";
-    ((std::cout << args << ","), ...);
-    std::cout << '\n';
+// Vector<pi>
+void DB(const vector<pi>& arr, string name = "", string SPACE = " ") {
+    cout << name  << " :Size [R][" << arr.size() << "] <pair>\n";
+    for (size_t r = 0; r < arr.size(); r++) {
+        cout << "" << SPACE << "[" << r << "]" << SPACE << "\t";
+        DB(arr[r]);
+    }
+    cout << "--- END Vector<pi> debug ---\n";
+}
+
+// map<K,T>
+template<typename K, typename T>
+void DB(const map<K,T>& mm, string name = "") {
+    cout << name  << " Size: [" << mm.size() << "]\n";
+    for(auto& s: mm) cout << s.first << " - " << s.second << "\n";
+    cout << "--- END map<int,T> debug ---\n";
 }
 
 #endif
-
 
 
 void timer_limitation() {

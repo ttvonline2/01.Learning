@@ -14,7 +14,7 @@ using namespace std;
 #define INF LONG_LONG_MAX
 #define MP make_pair
 #define FOR(_i,_a,_b) for(int _i = (_a); _i < (_b); _i++)
-#define FORI(_i,_a,_b) for(int _i = (_a); _i <= (_b); _i++)
+#define ROR(_i,_a,_b) for(int _i = (_a); _i >= (_b); _i--)
 #define FORE(it,x) for(auto it = x.begin(); it != x.end(); ++it)
 using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using vvi = vector<vi>;
 using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = "";
@@ -22,20 +22,21 @@ using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int i
 //**************************** CODING SPACE ****************************//
 
 void solve() {
-    int n,k; cin>> n >> k; vvi T;
-    vi temp(2,k); T.push_back(temp);
-    FOR(i,1,n){
-        vi A(i+1), B = T[T.size()-1];;
-        FOR(j,1,i+1){
-            if(j==1) A[j] = k;
-            else if(j == i) A[j] = k;
-            else A[j] = B[j-1] ^ B[j];
-        }
-        T.push_back(A);
+    string s; cin >> s; int n = s.size(); set<int> A,B;
+    FOR(i,0,n-1) {
+        if(s[i] == 'A' && s[i+1] == 'B') A.insert(i);
     }
-    // debugv(T);
+    ROR(i,n-1,1) {
+        if(s[i] == 'A' && s[i-1] == 'B') B.insert(i);
+    }
+    bool ans = false; debug(A); debug(B);
+    if(A.size() == 0 || B.size() == 0) ans = false;
+    else {
+        if(abs(A-B) > 2) ans = true;
+    }
+    ans ? cout << "YES\n" : cout <<  "NO\n";
 }
 
 int32_t main() {
-    vangtruong; int tcs = 1;
+    vangtruong; int tcs = 1; 
     while (tcs--) {solve();} hihihaha; return 0; }

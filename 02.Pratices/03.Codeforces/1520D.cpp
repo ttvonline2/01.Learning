@@ -20,22 +20,28 @@ using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using v
 using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = "";
 #endif
 //**************************** CODING SPACE ****************************//
+int comb(int n, int k) {
+    if (k > n) return 0;
+    if (k > n - k) k = n - k; // Tận dụng tính đối xứng C(n, k) = C(n, n-k)
+
+    int res = 1;
+    for (int i = 0; i < k; i++) {
+        res = res * (n - i) / (i + 1);
+    }
+    return res;
+}
 
 void solve() {
-    int n,k; cin>> n >> k; vvi T;
-    vi temp(2,k); T.push_back(temp);
-    FOR(i,1,n){
-        vi A(i+1), B = T[T.size()-1];;
-        FOR(j,1,i+1){
-            if(j==1) A[j] = k;
-            else if(j == i) A[j] = k;
-            else A[j] = B[j-1] ^ B[j];
-        }
-        T.push_back(A);
+    int n; cin >> n; vi A(n); FOR(i,0,n) {cin >> A[i]; A[i] -= i;};
+    map<int,int> m; for(auto x: A) m[x]++;
+    int ans = 0;
+    for(auto x: m){
+        if(x.second <= 1) continue;
+        else ans += comb(x.second,2ll);
     }
-    // debugv(T);
+    cout << ans << "\n";
 }
 
 int32_t main() {
-    vangtruong; int tcs = 1;
+    vangtruong; int tcs = 1; cin >> tcs;
     while (tcs--) {solve();} hihihaha; return 0; }
