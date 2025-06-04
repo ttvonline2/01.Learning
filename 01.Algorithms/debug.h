@@ -15,12 +15,12 @@ using namespace std::chrono;
 #define FOR(_i,_a,_b) for(int _i = (_a); _i < (_b); _i++)
 #define FORI(_i,_a,_b) for(int _i = (_a); _i <= (_b); _i++)
 #define FORE(it,x) for(auto it = x.begin(); it != x.end(); ++it)
-using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using vvi = vector<vi>;
+using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using vvi = vector<vi>; using vs = vector<string>;
 using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = "";
 
 
 #define vangtruong  freopen("D:/01.Learning/00.Ultility/input.txt", "r", stdin); freopen("D:/01.Learning/00.Ultility/output.txt", "w", stdout); auto start_time = high_resolution_clock::now() ; thread timeThread(timer_limitation); timeThread.detach()
-#define hihihaha auto end_time = high_resolution_clock::now();  auto duration_time = duration_cast<milliseconds>(end_time - start_time); cout << "Running time: " << duration_time.count() << " ms\n" ; finished_program = true
+#define hihihaha auto end_time = high_resolution_clock::now();  auto duration_time = duration_cast<milliseconds>(end_time - start_time); cout << "\nRunning time: " << duration_time.count() << " ms\n" ; finished_program = true
 template <class Ch, class Tr, class Container>
 basic_ostream <Ch, Tr> & operator << (basic_ostream <Ch, Tr> & os, Container const& x) {
     os << "{ ";
@@ -35,7 +35,7 @@ ostream & operator << (ostream & os, pair <X, Y> const& p) {
 
 bool finished_program = false;
 
-
+// brd + A.cpp
 #if OFF_DEBUG
 #define DB(...) //*** debug ***//
 #else
@@ -113,6 +113,6 @@ void DB(const map<K,T>& mm, string name = "") {
 
 void timer_limitation() {
     this_thread::sleep_for(chrono::seconds(2)); // Đợi 1 giây
-    if (!finished_program){cout << "Code Lỗi rồi fen > 2000ms\n"; exit(0);}
+    if (!finished_program){cout << "\nCode Lỗi rồi fen > 2000ms\n"; exit(0);}
     exit(0);
 }
