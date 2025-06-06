@@ -2,10 +2,11 @@
 #include "vstd.h"
 using namespace std;
 using namespace std::chrono;
-
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
 //*** debug(x) ***//
 #if OFF_DEBUG
-#define debug(x) //*** debug ***//
+#define debug(...) //*** debug ***//
 #else
 #define debug(...) cout << "[DEBUG] ";  _debug(#__VA_ARGS__, __VA_ARGS__)
 #define DB(...) cout << "[DEBUG] ";_DB(#__VA_ARGS__, __VA_ARGS__)
@@ -18,10 +19,12 @@ using namespace std::chrono;
 #define FORI(_i,_a,_b) for(int _i = (_a); _i <= (_b); _i++)
 #define FORE(it,x) for(auto it = x.begin(); it != x.end(); ++it)
 #define all(x) (x).begin(), (x).end()
+#define CR(_x,_n) (_x).clear(); (_x).resize((_n))
 using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using vvi = vector<vi>; using vs = vector<string>;
 using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = "";
 using vpi = vector<pi>; using vvpi = vector<vpi>;
-
+template <typename T, typename Comp>
+using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_statistics_node_update>; // Comp = less<int>, less_equal<int>, greater<int>, StructComp
 
 #define vangtruong  freopen("D:/01.Learning/00.Ultility/input.txt", "r", stdin); freopen("D:/01.Learning/00.Ultility/output.txt", "w", stdout); auto start_time = high_resolution_clock::now() ; thread timeThread(timer_limitation); timeThread.detach()
 #define hihihaha auto end_time = high_resolution_clock::now();  auto duration_time = duration_cast<milliseconds>(end_time - start_time); cout << "\nRunning time: " << duration_time.count() << " ms\n" ; finished_program = true

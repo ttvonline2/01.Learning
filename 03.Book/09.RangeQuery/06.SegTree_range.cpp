@@ -3,7 +3,7 @@
 #ifdef ONLINE_JUDGE
 #include<bits/stdc++.h>
 #else   
-#include "/Users/vangtruong/Documents/01.Learning/bits/stdc++.h"
+#include "D:/01.Learning/01.Algorithms/debug2.h"
 #endif
 using namespace std;
 

@@ -14,6 +14,7 @@ using namespace std; using namespace __gnu_pbds;
 #define ROR(_i,_b,_a) for(int _i = (_b); _i >= (_b); _i--)
 #define FORE(it,x) for(auto it = x.begin(); it != x.end(); ++it)
 #define all(x) (x).begin(), (x).end()
+#define CR(_x,_n) (_x).clear(); (_x).resize((_n))
 using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using vvi = vector<vi>; using vs = vector<string>; using vpi = vector<pair<int,int>>;
 using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = ""; using vvpi = vector<vector<pair<int,int>>>;
 template <typename T, typename Comp>
@@ -22,11 +23,31 @@ using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_stat
 #include "D:/01.Learning/01.Algorithms/debug2.h"
 #endif
 //**************************** CODING SPACE ****************************//
-
+vvi adj;
+vi cnt;
+pi leaf;
+void dfs(int u, int p, int pDepth) {
+    cnt[u] = pDepth + 1;
+    leaf = cnt[u] > leaf.second ? MP(u, cnt[u]) : leaf;
+    for(auto v: adj[u]){
+        if(v == p) continue;
+        dfs(v, u, cnt[u]);
+    }
+}
 void solve() {
+    int n; cin >> n; CR(adj,n+1); CR(cnt, n+1);
+    FOR(i,0,n-1) {
+        int u, v; cin >> u >> v; adj[u].push_back(v); adj[v].push_back(u);
+    }
+    leaf = MP(1,1);
+    dfs(1,0, 0); 
+    dfs(leaf.first,0,0);
+    debug(leaf);
+    DB(cnt);
+    cout << leaf.second - 1 << "\n";
     
 }
 
 int32_t main() {
-    vangtruong; int tcs = 1; cin >> tcs;
+    vangtruong; int tcs = 1; 
     while (tcs--) {solve();} hihihaha; return 0; }

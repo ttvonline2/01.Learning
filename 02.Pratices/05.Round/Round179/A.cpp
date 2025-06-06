@@ -24,7 +24,16 @@ using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_stat
 //**************************** CODING SPACE ****************************//
 
 void solve() {
-    
+    // luôn tăng số nhỏ nhất lên max
+    int x; cin >> x;
+    int res = 0;
+    vi A(3,0); sort(all(A));
+    while(A[0] < x) {
+        if(A[1] == 0) {res++; A[1] = 1; sort(all(A));}
+        A[0] = A[1]*2+1; sort(all(A)); res++;
+    }
+    debug(A);
+    cout << res << "\n";
 }
 
 int32_t main() {

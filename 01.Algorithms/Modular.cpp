@@ -1,4 +1,4 @@
-#include "D:/05.Learning/01.Algorithm/01.Algorithms/debug.h"
+#include "D:/01.Learning/01.Algorithms/debug2.h"
 //**************************** CODING SPACE ****************************//
 
 // Hàm tính (x^y) % m bằng phương pháp luỹ thừa nhị phân

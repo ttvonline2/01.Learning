@@ -5,7 +5,7 @@
 #define debugVi(x) //*** debug ***//
 #define debugVvi(x) //*** debug ***//
 #else
-#include "D:/05.Learning/01.Algorithm/01.Algorithms/debug.h"
+#include "D:/01.Learning/01.Algorithms/debug2.h"
 #endif
 #include<bits/stdc++.h>
 using namespace std;

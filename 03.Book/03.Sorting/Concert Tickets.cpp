@@ -24,9 +24,26 @@ using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_stat
 //**************************** CODING SPACE ****************************//
 
 void solve() {
-    
+    int n,m; cin >> n >> m;
+    vi C(n); for(auto&x: C) cin >> x;
+    ordered_set_custom<int,less_equal<int>> A; for(auto x: C) A.insert(x);
+    debug(A);
+    FOR(i,0,m){
+        int a; cin >> a;
+        // tim ve nho hon a = a --> a++
+        a++;
+        int pos = A.order_of_key(a); debug(pos);
+        if(pos == 0) cout << "-1\n";
+        else {
+            auto it = A.find_by_order(pos-1);
+            cout << *it << "\n";
+            A.erase(it);
+            debug(A);
+        }
+        // A.erase()
+    }
 }
 
 int32_t main() {
-    vangtruong; int tcs = 1; cin >> tcs;
+    vangtruong; int tcs = 1;
     while (tcs--) {solve();} hihihaha; return 0; }

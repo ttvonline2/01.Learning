@@ -23,10 +23,29 @@ using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_stat
 #endif
 //**************************** CODING SPACE ****************************//
 
+vi F = { 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144 };
+void preprocess() {
+
+}
 void solve() {
-    
+    int N, M; cin >> N >> M;
+    // canh 1 >= F[N] + F[N-1]
+    // canh 2 >= F[N]
+    // canh 3 >= F[N]
+    N--;
+    FOR(i,0,M) {
+        vi A(3,0); cin >> A[0] >> A[1] >> A[2];
+        sort(all(A));
+        if(A[0]>=F[N] &&A[1]>=F[N] && A[2]>= (F[N] + F[N-1])) {
+            cout << "1";
+        } else {
+            cout << "0";
+        }
+    }
+    cout << "\n";
 }
 
 int32_t main() {
     vangtruong; int tcs = 1; cin >> tcs;
+    preprocess();
     while (tcs--) {solve();} hihihaha; return 0; }

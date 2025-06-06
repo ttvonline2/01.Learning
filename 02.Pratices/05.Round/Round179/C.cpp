@@ -24,7 +24,25 @@ using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_stat
 //**************************** CODING SPACE ****************************//
 
 void solve() {
-    
+    // xet min --> res
+    // xet chuoi lien tiep --> optimize
+    int n, res = oo; cin >> n; vi A(n); for(auto&x: A) cin >> x;
+    int l = 0, r = 0;
+    // khi khac so, reset
+    int i = 0;
+    while(i < n){
+        l = r = i;
+        // try to increce r
+        while ((r+1) < n && A[r+1] == A[l]) r++;
+        
+        // cost
+        int cs = A[l]*(l-0) + A[r]*(n-r-1);
+        // debug(i,l,r,cs);
+        res = min(res,cs);
+        if(l == r) i++;
+        else i = r+1;
+    }
+    cout << res << "\n";
 }
 
 int32_t main() {

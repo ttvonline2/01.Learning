@@ -11,13 +11,16 @@ struct Rank {
     string username;
     int user_id;
 
-    // So sánh theo Elo giảm dần, nếu Elo bằng thì so theo user_id
-    bool operator<(const Rank& other) const {
-        return tie(elo, user_id) > tie(other.elo, other.user_id);
+};
+
+struct CompareByElo {
+    bool operator()(const Rank& a, const Rank& b) const {
+        if (a.elo != b.elo) return a.elo < b.elo;
+        return a.user_id < b.user_id;
     }
 };
 
-typedef tree<Rank, null_type, less<Rank>, rb_tree_tag, tree_order_statistics_node_update> RankTree;
+typedef tree<Rank, null_type, CompareByElo, rb_tree_tag, tree_order_statistics_node_update> RankTree;
 int32_t main() {
     
    RankTree ranking;

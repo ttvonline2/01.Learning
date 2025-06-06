@@ -24,7 +24,31 @@ using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_stat
 //**************************** CODING SPACE ****************************//
 
 void solve() {
+    int n,m; cin >> n >> m; vi C(m); for(auto&x: C) cin >> x; sort(all(C));
+    debug(C);
+    vi L(n),H(n);
+    FOR(i,0,n) {
+        L[i] = C[i];
+        H[i] = C[C.size()-1-i];
+    }
+    debug(L); debug(H);
+    vvi res(n, vi(6));
+    bool isThap = true;
+    FOR(i,0,n/2+1){
+        bool isCao = i%2 ==0 ? true: false;
+        FOR(k,0,6) {
+            res[i][k] = isCao ? H[i] : L[i];
+            isCao = !isCao;
+        }
+    }
+    if(n % 2 == 0) { // copy 0 --> n/2
+        FOR(i,n/2,n) {
+            res[i] = res[i-n/2];
+        }
+    }
     
+    DB(res);
+    // 1 3 5 2 4 6
 }
 
 int32_t main() {

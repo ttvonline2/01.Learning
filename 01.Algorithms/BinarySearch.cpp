@@ -1,4 +1,4 @@
-#include "D:/05.Learning/01.Algorithm/01.Algorithms/debug.h"
+#include "D:/01.Learning/01.Algorithms/debug2.h"
 //**************************** CODING SPACE ****************************//
 
 // target = 3 --> { 1, 2, [2], 4, 5 }
@@ -19,3 +19,14 @@ int bs_k_nho_nhat__LON_hon_target(vector<int>& A, int target, int st, int en) {
     return _k;
 }
 
+bool check(int curValue) {
+    if(curValue >= 3) return true;
+    return false;
+}
+// F, F, F, [T] , T, T
+int bs_k_lon_nhat(int st, int en) {
+    int _n = en - st + 1;
+    int curValue = en;
+    for (int b = _n / 2; b >= 1; b /= 2) while (curValue - b >= st && check(curValue -b)) curValue -= b;
+    return curValue;
+}
