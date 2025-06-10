@@ -70,12 +70,12 @@ void _DB(const pi& p)  {
 }
 
 // Vector<vector>>
-void _DB(const char* names,const vector<vector<int>>& _arr, string name = "", string SPACE = " ") {
-    cout << names;
+void _DB(const char* names,const vector<vector<int>>& _arr, string SPACE = " ") {
+    cout << "[" << names << "]";
     int _maxSize = 0;
     for (const auto& x : _arr) _maxSize = max(_maxSize, static_cast<int>(x.size()));
 
-    cout << name  << " :Size [R][C]: [" << _arr.size() << "][" << (_arr.empty() ? 0 : _arr[0].size()) << "]\n";
+    cout << " :Size [R][C]: [" << _arr.size() << "][" << (_arr.empty() ? 0 : _arr[0].size()) << "]\n";
 
     // Print column indices
     cout << SPACE << "[R]" << SPACE << "\t";
@@ -91,8 +91,8 @@ void _DB(const char* names,const vector<vector<int>>& _arr, string name = "", st
 }
 
 // Vector<int>
-void _DB(const char* names,const vector<int>& arr, string name = "", string SPACE = " ") {
-    cout << name  << " Size: [" << arr.size() << "]\n";
+void _DB(const char* names,const vector<int>& arr, string SPACE = " ") {
+    cout << "[" << names << "]" << " Size: [" << arr.size() << "]\n";
     cout <<  "[Index]" << SPACE << "\t";
     for (int i = 0; i < arr.size(); i++) cout << i << SPACE << "\t";
     cout <<  "\n[Value]" << SPACE << "\t";
@@ -102,7 +102,7 @@ void _DB(const char* names,const vector<int>& arr, string name = "", string SPAC
 
 // Vector<bool>
 void _DB(const char* names,const vector<bool>& arr, string SPACE = " ") {
-    cout << names  << " Size: [" << arr.size() << "]\n";
+    cout << "[" << names << "]" << " Size: [" << arr.size() << "]\n";
     cout <<  "[Index]" << SPACE << "\t";
     for (int i = 0; i < arr.size(); i++) cout << i << SPACE << "\t";
     cout <<  "\n[Value]" << SPACE << "\t";
@@ -112,7 +112,7 @@ void _DB(const char* names,const vector<bool>& arr, string SPACE = " ") {
 
 // Vector<pi>
 void _DB(const char* names, const vector<pi>& arr, string SPACE = " ") {
-    cout << names  << " :Size [" << arr.size() << "] <pair>\n";
+    cout << "[" << names << "]" << " :Size [" << arr.size() << "] <pair>\n";
     for (size_t r = 0; r < arr.size(); r++) {
         cout << "" << SPACE << "[" << r << "]" << SPACE << "\t";
         _DB(arr[r]);
@@ -122,7 +122,7 @@ void _DB(const char* names, const vector<pi>& arr, string SPACE = " ") {
 
 // Vector<vector<pi>> // adj do thi co trong so
 void _DB(const char* names, const vvpi& arr, string SPACE = " ") {
-    cout << names  << " :Vertex count = [" << arr.size() << "]\n";
+    cout << "[" << names << "]" << " :Vertex count = [" << arr.size() << "]\n";
     for (size_t r = 0; r < arr.size(); r++) {
         cout << "" << SPACE << "\tVertex " << r << " --> size [" << arr[r].size() << "]\n";
         for (size_t v = 0; v < arr[r].size(); v++) {
@@ -139,7 +139,7 @@ void _DB(const char* names, const vvpi& arr, string SPACE = " ") {
 // map<K,T>
 template<typename K, typename T>
 void _DB(const char* names,const map<K,T>& mm) {
-    cout << names  << " Size: [" << mm.size() << "]\n";
+    cout << "[" << names << "]" << " Size: [" << mm.size() << "]\n";
     for(auto& s: mm) cout << s.first << " - " << s.second << "\n";
     cout << "--- END map<K,T> debug ---\n";
 }
@@ -150,7 +150,7 @@ void _DB(const char* names,const map<K,T>& mm) {
 template<typename T>
 void _DB(const char* names,const queue<T>& _q) {
     queue<T> q = _q;
-    cout << names  << " Size: [" << q.size() << "]\n";
+    cout << "[" << names << "]" << " Size: [" << q.size() << "]\n";
     cout << " << [Front] ";
     while(!q.empty()){
         T t = q.front(); q.pop(); cout << t << (q.empty()? " [Back] <<\n" : ", ");
@@ -161,7 +161,7 @@ void _DB(const char* names,const queue<T>& _q) {
 template<typename T>
 void _DB(const char* names,const priority_queue<T>& _q) {
     priority_queue<T> q = _q;
-    cout << names  << " Size: [" << q.size() << "]\n";
+    cout << "[" << names << "]" << " Size: [" << q.size() << "]\n";
     cout << " << [Top] ";
     while(!q.empty()){
         T t = q.top(); q.pop(); cout << t << (q.empty()? " [Back] <<\n" : ", ");
@@ -173,7 +173,7 @@ void _DB(const char* names,const priority_queue<T>& _q) {
 template<typename T>
 void _DB(const char* names,const priority_queue<T, vector<T>, greater<T>>& _q) {
     priority_queue<T, vector<T>, greater<T>> q = _q;
-    cout << names  << " Size: [" << q.size() << "]\n";
+    cout << "[" << names << "]" << " Size: [" << q.size() << "]\n";
     cout << " << [Top] ";
     while(!q.empty()){
         T t = q.top(); q.pop(); cout << t << (q.empty()? " [Back] <<\n" : ", ");

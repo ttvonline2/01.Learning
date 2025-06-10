@@ -41,7 +41,6 @@ void solve() {
         int u, v; cin >> u >> v; adj[u].push_back(v); adj[v].push_back(u);
     }
     dfs(1,0);
-    DB(cnt);
 }
 
 int32_t main() {

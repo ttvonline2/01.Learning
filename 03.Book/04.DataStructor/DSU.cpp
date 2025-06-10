@@ -25,18 +25,39 @@ using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_stat
 //**************************** CODING SPACE ****************************//
 int N, M;
 vvi edge;
+vi link, cnt;
+int find(int x) {
+    while (x != link[x]) x = link[x];
+    return x;
+}
+bool same(int a, int b) {
+    return find(a) == find(b);
+}
 
+void unite(int a, int b) {
+    a = find(a);
+    b = find(b);
+    if (cnt[a] < cnt[b]) swap(a, b);
+    cnt[a] += cnt[b];
+    link[b] = a;
+}
 void solve() {
-    cin >> N >> M; edge.clear();
-    int u,v,w;
+    cin >> N >> M; edge.clear(); CR(link,N+1); cnt.clear(); cnt.resize(N+1,1);
+    int u,v,w; int res = 0;
     FOR(i,0,M) {
         cin >> u >> v >> w; edge.push_back({w,u,v});
     }
-    DB(edge);
+    FOR(i,1,N+1) {link[i]=i;}
     sort(all(edge),[](vi& a, vi&b) {
         return a[0] < b[0];
     });
-    DB(edge);
+    for(auto e: edge) {
+        int u = e[1], v = e[2];
+        if(same(u,v)) continue;
+        unite(u,v); res+=e[0];
+    }
+    DB(link); DB(cnt);
+    cout << res << "\n";
 }
 
 int32_t main() {
