@@ -1,11 +1,3 @@
-[DEBUG] [link] Size: [5]
-[Index] 	0 	1 	2 	3 	4 	
-[Value] 	0 	1 	4 	1 	1 	
---- END Vector<int> debug ---
-[DEBUG] [cnt] Size: [5]
-[Index] 	0 	1 	2 	3 	4 	
-[Value] 	1 	4 	1 	1 	2 	
---- END Vector<int> debug ---
-17
+-1
 
 Running time: 0 ms

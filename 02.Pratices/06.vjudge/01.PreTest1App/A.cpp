@@ -14,7 +14,6 @@ using namespace std; using namespace __gnu_pbds;
 #define ROR(_i,_b,_a) for(int _i = (_b); _i >= (_b); _i--)
 #define FORE(it,x) for(auto it = x.begin(); it != x.end(); ++it)
 #define all(x) (x).begin(), (x).end()
-#define CR(_x,_n) (_x).clear(); (_x).resize((_n))
 using vb = vector<bool>; using vvb = vector<vb>; using vi = vector<int>; using vvi = vector<vi>; using vs = vector<string>; using vpi = vector<pair<int,int>>;
 using vc = vector<char>; using vvc = vector<vc>; using pi = pair<int,int>; int itemp = 0; string stemp = ""; using vvpi = vector<vector<pair<int,int>>>;
 template <typename T, typename Comp>
@@ -23,42 +22,32 @@ using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_stat
 #include "D:/01.Learning/01.Algorithms/debug2.h"
 #endif
 //**************************** CODING SPACE ****************************//
-
-struct Fenwick {
-    vi bit;
-    int n;
-    Fenwick (int _n = 0) {init(_n);}
-    void init(int _n) {
-        n = _n;
-        bit.assign(n + 1, 0);
+vvi ans; int N, M;
+void getAns(int startVal,int pos, vi& res) {
+    if(pos >= N) return;
+    if(pos < N-1 && startVal >= M) return;
+    if(pos < N && pos != -1) res[pos] = startVal;
+    if(pos == N-1 && startVal <= M) {ans.push_back(res); return;}
+    // fill next
+    FOR(i,0,M+1) {
+        getAns(startVal+10+ i,pos+1,res);
     }
-    void add(int idx, int val) {
-        for(int i = idx; i <= n; i += i&-i)
-            bit[i] += val;
-    }
-    int sum(int idx) const {
-        int res = 0;
-        for(int i = idx; i > 0; i-= i&-i)
-            res += bit[i];
-        return res;
-    }
-    int query(int l, int r) const { 
-        if(l > r) return 0;
-        return sum(r) - sum(l - 1);
-    }
-};
+    res[pos] = 0;
+}
 
 void solve() {
-    int N; 
-    cin >> N; 
-    vi B(N+1);
-    for (int i = 1; i <= N; ++i) cin >> B[i];
-    if(N<3) {
-        cout << 0 << '\n';
-        return;
-    }    
+    cin >> N >> M; vi res(N,0);
+    FOR(i,1,M+1) {
+        getAns(i,0,res);
+    }
+    DB(ans);
+    cout << ans.size() << "\n";
+    for(auto v: ans) {
+        for(auto x: v) cout << x << " ";
+        cout << "\n";
+    }
 }
 
 int32_t main() {
-    vangtruong; int tcs = 1; cin >> tcs;
+    vangtruong; int tcs = 1; 
     while (tcs--) {solve();} hihihaha; return 0; }

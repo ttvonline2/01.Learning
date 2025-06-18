@@ -23,40 +23,41 @@ using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_stat
 #include "D:/01.Learning/01.Algorithms/debug2.h"
 #endif
 //**************************** CODING SPACE ****************************//
-
-struct Fenwick {
-    vi bit;
-    int n;
-    Fenwick (int _n = 0) {init(_n);}
-    void init(int _n) {
-        n = _n;
-        bit.assign(n + 1, 0);
+int pairsCount(vector<pair<char, char>> & a, char x1, char y1, char x2, char y2) {
+    int first = 0, res = 0;
+    for(auto [x,y] : a) {
+        if(x == x1 && y == y1) ++first;
+        else if(x==x2&& y == y2 && first){ --first; ++res;} 
     }
-    void add(int idx, int val) {
-        for(int i = idx; i <= n; i += i&-i)
-            bit[i] += val;
-    }
-    int sum(int idx) const {
-        int res = 0;
-        for(int i = idx; i > 0; i-= i&-i)
-            res += bit[i];
-        return res;
-    }
-    int query(int l, int r) const { 
-        if(l > r) return 0;
-        return sum(r) - sum(l - 1);
-    }
-};
+    return res;
+}
 
 void solve() {
-    int N; 
-    cin >> N; 
-    vi B(N+1);
-    for (int i = 1; i <= N; ++i) cin >> B[i];
-    if(N<3) {
-        cout << 0 << '\n';
-        return;
-    }    
+    int n, q; cin >> n >> q;
+    string s; cin >> s;
+    vector<pair<char,char>> op(q);
+    int ba = 0, ca = 0, cb = 0, bc = 0;
+    for(int i = 0; i <q ; ++i) {
+        cin >> op[i].first >> op[i].second;
+        if(op[i] == MP('b','a')) ++ba;
+        else if(op[i] == MP('c','a')) ++ca;
+        else if(op[i] == MP('c','b')) ++cb;
+        else if(op[i] == MP('b','c')) ++bc;
+    }
+    int pcb = pairsCount(op,'c','b','b','a');
+    int pbc = pairsCount(op,'b','c','c','a');
+    string res = s;
+    for(char& c: res) {
+        if(c == 'b') {
+            if(ba) {c = 'a'; --ba;}
+            else if(pbc && bc && ca) {c = 'a'; --pbc; --bc; --ca;}
+        } else if(c == 'c') {
+            if(ca) {c = 'a'; --ca;}
+            else if(pcb&&cb&& ba) {c = 'a';--pcb; --cb; --ba;}
+            else if(cb) { c = 'b'; --cb;}
+        }
+    }
+    cout << res << '\n';
 }
 
 int32_t main() {

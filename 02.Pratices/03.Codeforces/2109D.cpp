@@ -24,39 +24,39 @@ using ordered_set_custom = tree<T, null_type, Comp, rb_tree_tag, tree_order_stat
 #endif
 //**************************** CODING SPACE ****************************//
 
-struct Fenwick {
-    vi bit;
-    int n;
-    Fenwick (int _n = 0) {init(_n);}
-    void init(int _n) {
-        n = _n;
-        bit.assign(n + 1, 0);
-    }
-    void add(int idx, int val) {
-        for(int i = idx; i <= n; i += i&-i)
-            bit[i] += val;
-    }
-    int sum(int idx) const {
-        int res = 0;
-        for(int i = idx; i > 0; i-= i&-i)
-            res += bit[i];
-        return res;
-    }
-    int query(int l, int r) const { 
-        if(l > r) return 0;
-        return sum(r) - sum(l - 1);
-    }
-};
-
 void solve() {
-    int N; 
-    cin >> N; 
-    vi B(N+1);
-    for (int i = 1; i <= N; ++i) cin >> B[i];
-    if(N<3) {
-        cout << 0 << '\n';
-        return;
-    }    
+    int n,m,l; cin >> n >> m >> l;
+    int S = 0; 
+    for(int i = 0, x; i < l; i++) {cin >> x; S += x;}
+    vvi g(n+1);
+    for(int i = 0, u, v; i < m; i++) {
+        cin >> u >> v;
+        g[u].push_back(v);
+        g[v].push_back(u);
+    }
+    vi dist(n+1, -1), kernel(n+1,-1);
+    queue<int> q; q.push(1); dist[1] = 0; kernel[1] = 0;
+    bool bip = true;
+    while(!q.empty()) {
+        int u = q.front(); q.pop();
+        for(int v: g[u]) {
+            if(dist[v] == -1) {
+                dist[v] = dist[u]+1;
+                kernel[v] = kernel[u]^1;
+                q.push(v);
+            } else if(kernel[v] == kernel[u]) bip = false;
+        }
+    }
+    string ans(n,'0'); 
+    if(bip) {
+        for(int i = 1; i <= n ; i++)
+            if(dist[i] <= S && ((S-dist[i])&1) == 0) ans[i-1]='1';
+    } else {
+        for(int i=2; i<=n;i++)
+            if(dist[i]<=S) ans[i-1]='1';
+        if(S!=1) ans[0] = '1';
+    }
+    cout << ans << "\n";
 }
 
 int32_t main() {
